@@ -248,7 +248,7 @@ function RankingCard({
 export default function AverageGolferPage() {
   return (
     <div className="min-h-screen bg-[#efe9d8] text-[#1d2419]">
-      return (
+     
     <div className="relative z-20 mx-auto max-w-3xl px-6 pt-24 pb-6 text-center text-white">
       <p className="text-lg">
         I’m Noah — an average golfer shooting mid-80s and reviewing courses for
