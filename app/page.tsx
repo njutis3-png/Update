@@ -247,13 +247,13 @@ function RankingCard({
 
 export default function AverageGolferPage() {
   return (
-<div className="bg-[#e7e0cf] py-10 px-6 text-center border-b border-black/5">
-  
-  <p className="mx-auto max-w-2xl text-[15px] md:text-base text-[#1d2419] leading-relaxed">
-    I’m Noah — an average golfer shooting mid-80s and reviewing courses for regular golfers. 
-    No fluff, no country club bias — just honest ratings on where I’d actually play again.
-  </p>
-</div>;
+<div className="min-h-screen bg-[#efe9d8] text-[#1d2419]">
+  <div className="bg-[#e7e0cf] py-10 px-6 text-center border-b border-black/5">
+    <p className="mx-auto max-w-2xl text-[15px] md:text-base text-[#1d2419] leading-relaxed">
+      I’m Noah — an average golfer shooting mid-80s and reviewing courses for regular golfers.
+      No fluff, no country club bias — just honest ratings on where I’d actually play again.
+    </p>
+  </div>
       
       {/* Header */}
       <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/15 bg-black/15 text-white backdrop-blur-md">
