@@ -250,7 +250,7 @@ export default function AverageGolferPage() {
     <div className="min-h-screen bg-[#efe9d8] text-[#1d2419]">
 
       {/* Top intro */}
-      <div className="bg-[#e7e0cf] pt-16 pb-6 px-6 text-center">
+      <div className="bg-[#e7e0cf] pt-24 pb-12 px-6 text-center">
         <p className="mx-auto max-w-3xl text-[12px] md:text-sm tracking-[0.18em] uppercase text-[#1d2419]/80">
           I’m Noah — an average golfer shooting mid-80s and reviewing courses for regular golfers.
           No fluff, no country club bias — just honest ratings on where I’d actually play again.
