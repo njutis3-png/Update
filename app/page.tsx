@@ -253,7 +253,7 @@ export default function AverageGolferPage() {
     I’m Noah — an average golfer shooting mid-80s and reviewing courses for regular golfers. 
     No fluff, no country club bias — just honest ratings on where I’d actually play again.
   </p>
-</div>
+</div>;
       
       {/* Header */}
       <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/15 bg-black/15 text-white backdrop-blur-md">
