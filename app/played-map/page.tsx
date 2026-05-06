@@ -23,6 +23,7 @@ interface Course {
   type: "Public" | "Private";
   state: string;
   note: string;
+  status?: "rated" | "played-not-rated";
 }
 
 const courses: Course[] = [
@@ -125,6 +126,77 @@ const courses: Course[] = [
     state: "Tennessee",
     note: "Relaxed round in a good setting, but conditions and layout keep it lower.",
   },
+  // Played but not rated courses
+  {
+    name: "Greywalls at Marquette Golf Club",
+    location: "Marquette, MI",
+    coordinates: [-87.3954, 46.5436],
+    rating: "—",
+    type: "Public",
+    state: "Michigan",
+    note: "Played but not rated.",
+    status: "played-not-rated",
+  },
+  {
+    name: "Forest Dunes: The Loop Red",
+    location: "Roscommon, MI",
+    coordinates: [-84.5917, 44.4989],
+    rating: "—",
+    type: "Public",
+    state: "Michigan",
+    note: "Played but not rated.",
+    status: "played-not-rated",
+  },
+  {
+    name: "Forest Dunes: The Loop Black",
+    location: "Roscommon, MI",
+    coordinates: [-84.5917, 44.4989],
+    rating: "—",
+    type: "Public",
+    state: "Michigan",
+    note: "Played but not rated.",
+    status: "played-not-rated",
+  },
+  {
+    name: "Forest Dunes: Tom Weiskopf Course",
+    location: "Roscommon, MI",
+    coordinates: [-84.5917, 44.4989],
+    rating: "—",
+    type: "Public",
+    state: "Michigan",
+    note: "Played but not rated.",
+    status: "played-not-rated",
+  },
+  {
+    name: "Olde Stone",
+    location: "Bowling Green, KY",
+    coordinates: [-86.4436, 36.9685],
+    rating: "—",
+    type: "Private",
+    state: "Kentucky",
+    note: "Played but not rated.",
+    status: "played-not-rated",
+  },
+  {
+    name: "Streamsong Black",
+    location: "Streamsong, FL",
+    coordinates: [-81.5167, 27.6458],
+    rating: "—",
+    type: "Public",
+    state: "Florida",
+    note: "Played but not rated.",
+    status: "played-not-rated",
+  },
+  {
+    name: "Dutchman's Pipe",
+    location: "Florida",
+    coordinates: [-81.4500, 27.6500],
+    rating: "—",
+    type: "Public",
+    state: "Florida",
+    note: "Played but not rated.",
+    status: "played-not-rated",
+  },
 ];
 
 export default function PlayedMapPage() {
@@ -132,6 +204,7 @@ export default function PlayedMapPage() {
   const [stateFilter, setStateFilter] = useState<string>("All");
   const [typeFilter, setTypeFilter] = useState<string>("All");
   const [ratingFilter, setRatingFilter] = useState<string>("All");
+  const [statusFilter, setStatusFilter] = useState<string>("All");
   const [showFilters, setShowFilters] = useState(false);
 
   const states = useMemo(() => {
@@ -143,7 +216,13 @@ export default function PlayedMapPage() {
     return courses.filter((course) => {
       if (stateFilter !== "All" && course.state !== stateFilter) return false;
       if (typeFilter !== "All" && course.type !== typeFilter) return false;
+      if (statusFilter !== "All") {
+        const isNotRated = course.status === "played-not-rated";
+        if (statusFilter === "Rated" && isNotRated) return false;
+        if (statusFilter === "Played but not rated" && !isNotRated) return false;
+      }
       if (ratingFilter !== "All") {
+        if (course.status === "played-not-rated") return false;
         const rating = parseFloat(course.rating);
         if (ratingFilter === "8+" && rating < 8) return false;
         if (ratingFilter === "7-8" && (rating < 7 || rating >= 8)) return false;
@@ -151,16 +230,17 @@ export default function PlayedMapPage() {
       }
       return true;
     });
-  }, [stateFilter, typeFilter, ratingFilter]);
+  }, [stateFilter, typeFilter, ratingFilter, statusFilter]);
 
   const clearFilters = () => {
     setStateFilter("All");
     setTypeFilter("All");
     setRatingFilter("All");
+    setStatusFilter("All");
   };
 
   const hasActiveFilters =
-    stateFilter !== "All" || typeFilter !== "All" || ratingFilter !== "All";
+    stateFilter !== "All" || typeFilter !== "All" || ratingFilter !== "All" || statusFilter !== "All";
 
   return (
     <div className="min-h-screen bg-[#1a1f1a] text-[#f8f3e4]">
@@ -307,6 +387,27 @@ export default function PlayedMapPage() {
                         </select>
                       </div>
 
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+                          Status
+                        </label>
+                        <select
+                          value={statusFilter}
+                          onChange={(e) => setStatusFilter(e.target.value)}
+                          className="rounded-lg border border-white/20 bg-transparent px-3 py-2 text-sm outline-none focus:border-[#c1b58c]"
+                        >
+                          <option value="All" className="bg-[#1a1f1a]">
+                            All
+                          </option>
+                          <option value="Rated" className="bg-[#1a1f1a]">
+                            Rated
+                          </option>
+                          <option value="Played but not rated" className="bg-[#1a1f1a]">
+                            Played but not rated
+                          </option>
+                        </select>
+                      </div>
+
                       {hasActiveFilters && (
                         <button
                           onClick={clearFilters}
@@ -354,30 +455,38 @@ export default function PlayedMapPage() {
                     }
                   </Geographies>
 
-                  {filteredCourses.map((course) => (
-                    <Marker
-                      key={course.name}
-                      coordinates={course.coordinates}
-                      onClick={() => setSelectedCourse(course)}
-                    >
-                      <g
-                        className="cursor-pointer transition-transform hover:scale-125"
-                        style={{ transformOrigin: "center" }}
+                  {filteredCourses.map((course) => {
+                    const isNotRated = course.status === "played-not-rated";
+                    const markerColor = isNotRated
+                      ? "#6b7280"
+                      : course.type === "Private"
+                      ? "#c1b58c"
+                      : "#f8f3e4";
+                    return (
+                      <Marker
+                        key={course.name}
+                        coordinates={course.coordinates}
+                        onClick={() => setSelectedCourse(course)}
                       >
-                        <circle
-                          r={8}
-                          fill={course.type === "Private" ? "#c1b58c" : "#f8f3e4"}
-                          stroke="#1a1f1a"
-                          strokeWidth={2}
-                        />
-                        <circle r={3} fill="#1a1f1a" />
-                      </g>
-                    </Marker>
-                  ))}
+                        <g
+                          className="cursor-pointer transition-transform hover:scale-125"
+                          style={{ transformOrigin: "center" }}
+                        >
+                          <circle
+                            r={8}
+                            fill={markerColor}
+                            stroke="#1a1f1a"
+                            strokeWidth={2}
+                          />
+                          <circle r={3} fill="#1a1f1a" />
+                        </g>
+                      </Marker>
+                    );
+                  })}
                 </ComposableMap>
 
                 {/* Legend */}
-                <div className="absolute bottom-4 left-4 flex items-center gap-4 rounded-xl bg-[#1a1f1a]/90 px-4 py-3 backdrop-blur-sm">
+                <div className="absolute bottom-4 left-4 flex flex-wrap items-center gap-4 rounded-xl bg-[#1a1f1a]/90 px-4 py-3 backdrop-blur-sm">
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full bg-[#f8f3e4]" />
                     <span className="text-xs text-white/70">Public</span>
@@ -385,6 +494,10 @@ export default function PlayedMapPage() {
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full bg-[#c1b58c]" />
                     <span className="text-xs text-white/70">Private</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-3 w-3 rounded-full bg-[#6b7280]" />
+                    <span className="text-xs text-white/70">Not Rated</span>
                   </div>
                 </div>
 
@@ -406,7 +519,15 @@ export default function PlayedMapPage() {
                 </h3>
                 <div className="space-y-3">
                   {filteredCourses
-                    .sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
+                    .sort((a, b) => {
+                      // Sort rated courses by rating, then not-rated at the end
+                      const aNotRated = a.status === "played-not-rated";
+                      const bNotRated = b.status === "played-not-rated";
+                      if (aNotRated && !bNotRated) return 1;
+                      if (!aNotRated && bNotRated) return -1;
+                      if (aNotRated && bNotRated) return a.name.localeCompare(b.name);
+                      return parseFloat(b.rating) - parseFloat(a.rating);
+                    })
                     .map((course) => (
                       <button
                         key={course.name}
@@ -426,12 +547,18 @@ export default function PlayedMapPage() {
                               {course.location}
                             </p>
                           </div>
-                          <div className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-1">
-                            <Star size={12} className="text-[#c1b58c]" />
-                            <span className="text-sm font-bold">
-                              {course.rating}
+                          {course.status === "played-not-rated" ? (
+                            <span className="rounded-full bg-[#6b7280]/20 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-[#6b7280]">
+                              Not Rated
                             </span>
-                          </div>
+                          ) : (
+                            <div className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-1">
+                              <Star size={12} className="text-[#c1b58c]" />
+                              <span className="text-sm font-bold">
+                                {course.rating}
+                              </span>
+                            </div>
+                          )}
                         </div>
                         <div className="mt-2 flex items-center gap-2">
                           <span
@@ -492,12 +619,18 @@ export default function PlayedMapPage() {
                     {selectedCourse.type}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 rounded-full bg-[#c1b58c] px-3 py-1">
-                  <Star size={14} className="text-[#1a1f1a]" />
-                  <span className="font-bold text-[#1a1f1a]">
-                    {selectedCourse.rating}
+{selectedCourse.status === "played-not-rated" ? (
+                  <span className="rounded-full bg-[#6b7280]/30 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#9ca3af]">
+                    Not Rated
                   </span>
-                </div>
+                ) : (
+                  <div className="flex items-center gap-2 rounded-full bg-[#c1b58c] px-3 py-1">
+                    <Star size={14} className="text-[#1a1f1a]" />
+                    <span className="font-bold text-[#1a1f1a]">
+                      {selectedCourse.rating}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <h2 className="font-serif text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em]">

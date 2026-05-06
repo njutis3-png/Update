@@ -550,7 +550,7 @@ export default function AverageGolferPage() {
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#2c3325] px-6 py-3 shadow-lg">
-                <p className="font-serif text-2xl font-black text-[#efe9d8]">11</p>
+                <p className="font-serif text-2xl font-black text-[#efe9d8]">10</p>
                 <p className="text-xs uppercase tracking-widest text-[#a8b89a]">Handicap</p>
               </div>
             </div>
