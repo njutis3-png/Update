@@ -7,8 +7,9 @@ import {
   Geographies,
   Geography,
   Marker,
+  ZoomableGroup,
 } from "react-simple-maps";
-import { MapPin, Star, X, ArrowLeft, Filter, ChevronDown } from "lucide-react";
+import { MapPin, Star, X, ArrowLeft, Filter, ChevronDown, Plus, Minus } from "lucide-react";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -206,6 +207,28 @@ export default function PlayedMapPage() {
   const [ratingFilter, setRatingFilter] = useState<string>("All");
   const [statusFilter, setStatusFilter] = useState<string>("All");
   const [showFilters, setShowFilters] = useState(false);
+  const [position, setPosition] = useState<{ coordinates: [number, number]; zoom: number }>({
+    coordinates: [-86.5, 37],
+    zoom: 1,
+  });
+
+  const handleZoomIn = () => {
+    if (position.zoom >= 8) return;
+    setPosition((pos) => ({ ...pos, zoom: pos.zoom * 1.5 }));
+  };
+
+  const handleZoomOut = () => {
+    if (position.zoom <= 1) return;
+    setPosition((pos) => ({ ...pos, zoom: pos.zoom / 1.5 }));
+  };
+
+  const handleMoveEnd = (position: { coordinates: [number, number]; zoom: number }) => {
+    setPosition(position);
+  };
+
+  const handleResetZoom = () => {
+    setPosition({ coordinates: [-86.5, 37], zoom: 1 });
+  };
 
   const states = useMemo(() => {
     const uniqueStates = [...new Set(courses.map((c) => c.state))];
@@ -432,6 +455,13 @@ export default function PlayedMapPage() {
                   }}
                   className="h-[500px] w-full md:h-[600px]"
                 >
+                  <ZoomableGroup
+                    zoom={position.zoom}
+                    center={position.coordinates}
+                    onMoveEnd={handleMoveEnd}
+                    minZoom={1}
+                    maxZoom={8}
+                  >
                   <Geographies geography={geoUrl}>
                     {({ geographies }) =>
                       geographies.map((geo) => {
@@ -483,6 +513,7 @@ export default function PlayedMapPage() {
                       </Marker>
                     );
                   })}
+                  </ZoomableGroup>
                 </ComposableMap>
 
                 {/* Legend */}
@@ -509,6 +540,34 @@ export default function PlayedMapPage() {
                   <span className="ml-2 text-xs uppercase tracking-widest text-white/70">
                     Courses
                   </span>
+                </div>
+
+                {/* Zoom Controls */}
+                <div className="absolute right-4 bottom-4 flex flex-col gap-2">
+                  <button
+                    onClick={handleZoomIn}
+                    disabled={position.zoom >= 8}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#1a1f1a]/90 backdrop-blur-sm border border-white/10 text-white/80 transition hover:bg-[#2a302a] hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
+                    aria-label="Zoom in"
+                  >
+                    <Plus size={18} />
+                  </button>
+                  <button
+                    onClick={handleZoomOut}
+                    disabled={position.zoom <= 1}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#1a1f1a]/90 backdrop-blur-sm border border-white/10 text-white/80 transition hover:bg-[#2a302a] hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
+                    aria-label="Zoom out"
+                  >
+                    <Minus size={18} />
+                  </button>
+                  {position.zoom > 1 && (
+                    <button
+                      onClick={handleResetZoom}
+                      className="flex h-10 w-auto px-3 items-center justify-center rounded-lg bg-[#1a1f1a]/90 backdrop-blur-sm border border-white/10 text-[10px] font-bold uppercase tracking-wider text-white/80 transition hover:bg-[#2a302a] hover:text-white"
+                    >
+                      Reset
+                    </button>
+                  )}
                 </div>
               </div>
 
