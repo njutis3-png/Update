@@ -492,6 +492,11 @@ export default function PlayedMapPage() {
                       : course.type === "Private"
                       ? "#c1b58c"
                       : "#f8f3e4";
+                    // Scale markers inversely with zoom to keep consistent visual size
+                    const markerScale = 1 / position.zoom;
+                    const baseRadius = 8;
+                    const innerRadius = 3;
+                    const strokeWidth = 2;
                     return (
                       <Marker
                         key={course.name}
@@ -499,16 +504,20 @@ export default function PlayedMapPage() {
                         onClick={() => setSelectedCourse(course)}
                       >
                         <g
-                          className="cursor-pointer transition-transform hover:scale-125"
-                          style={{ transformOrigin: "center" }}
+                          className="cursor-pointer"
+                          style={{ 
+                            transform: `scale(${markerScale})`,
+                            transformOrigin: "center",
+                          }}
                         >
                           <circle
-                            r={8}
+                            r={baseRadius}
                             fill={markerColor}
                             stroke="#1a1f1a"
-                            strokeWidth={2}
+                            strokeWidth={strokeWidth}
+                            className="transition-all duration-150 hover:fill-white"
                           />
-                          <circle r={3} fill="#1a1f1a" />
+                          <circle r={innerRadius} fill="#1a1f1a" />
                         </g>
                       </Marker>
                     );
