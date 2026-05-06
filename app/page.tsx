@@ -7,7 +7,28 @@ import {
   MapPin,
   Star,
   CalendarDays,
+  Play,
+  Instagram,
+  Youtube,
 } from "lucide-react";
+
+// Custom TikTok icon since Lucide doesn't have one
+function TikTokIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+    </svg>
+  );
+}
+
+// Custom X (Twitter) icon
+function XIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  );
+}
 
 const courseData = [
   {
@@ -170,17 +191,17 @@ function CourseButtons({ course }: { course: Course }) {
         href={course.website}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 border-b border-[#1d2419] pb-1 text-xs font-bold uppercase tracking-[0.2em]"
+        className="group inline-flex items-center gap-2 rounded-full bg-[#2f4f3a] px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#3d6149]"
       >
-        View Website <ArrowUpRight size={15} />
+        <Play size={14} /> Watch Review
       </a>
       <a
         href={course.booking}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-full border border-[#1d2419] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] transition hover:bg-[#1d2419] hover:text-white"
+        className="inline-flex items-center gap-2 rounded-full border border-[#1d2419]/30 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-[#1d2419]/70 transition hover:border-[#1d2419] hover:text-[#1d2419]"
       >
-        <CalendarDays size={15} /> Book Tee Time
+        <CalendarDays size={14} /> Book Tee Time
       </a>
     </div>
   );
@@ -249,40 +270,78 @@ export default function AverageGolferPage() {
   return (
     <div className="min-h-screen bg-[#efe9d8] text-[#1d2419]">
 
-      {/* Top intro */}
-      <div className="bg-[#e7e0cf] pt-24 pb-12 px-6 text-center">
-        <p className="mx-auto max-w-3xl text-[12px] md:text-sm tracking-[0.18em] uppercase text-[#1d2419]/80">
-          I’m Noah — an average golfer shooting mid-80s and reviewing courses for regular golfers.
-          No fluff, no country club bias — just honest ratings on where I’d actually play again.
-        </p>
-      </div>
+
       
       {/* Header */}
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/15 bg-black/15 text-white backdrop-blur-md">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-[#1a1f1a]/90 text-white backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-          <div className="font-serif text-xl tracking-[-0.02em]">
+          <a href="/" className="font-serif text-xl tracking-[-0.02em] hover:text-[#c1b58c] transition">
             Average Golfer
-          </div>
-          <nav className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.22em] text-white/75 md:flex">
-            <a href="#top" className="hover:text-white">
+          </a>
+          <nav className="hidden items-center gap-6 text-[11px] font-bold uppercase tracking-[0.22em] text-white/70 lg:flex">
+            <a href="#top" className="hover:text-white transition">
               Top 3
             </a>
-            <a href="#rankings" className="hover:text-white">
+            <a href="#rankings" className="hover:text-white transition">
               Rankings
             </a>
-            <a href="#categories" className="hover:text-white">
-              Categories
+            <a href="/played-map" className="hover:text-white transition">
+              Played Map
             </a>
-            <a href="#about" className="hover:text-white">
+            <a href="/brand" className="hover:text-white transition">
+              Brand
+            </a>
+            <a href="#about" className="hover:text-white transition">
               About
             </a>
           </nav>
-          <a
-            href="#top"
-            className="rounded-full border border-white/35 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-black"
-          >
-            View List
-          </a>
+          <div className="flex items-center gap-4">
+            {/* Social Icons */}
+            <div className="hidden items-center gap-3 md:flex">
+              <a
+                href="https://instagram.com/Ritz_kicks"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/50 transition hover:text-[#c1b58c]"
+                aria-label="Instagram"
+              >
+                <Instagram size={18} />
+              </a>
+              <a
+                href="https://tiktok.com/@Ritz_kicks"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/50 transition hover:text-[#c1b58c]"
+                aria-label="TikTok"
+              >
+                <TikTokIcon size={18} />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/50 transition hover:text-[#c1b58c]"
+                aria-label="YouTube"
+              >
+                <Youtube size={18} />
+              </a>
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/50 transition hover:text-[#c1b58c]"
+                aria-label="X"
+              >
+                <XIcon size={16} />
+              </a>
+            </div>
+            <a
+              href="#top"
+              className="hidden rounded-full border border-white/25 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-[#1a1f1a] sm:block"
+            >
+              View List
+            </a>
+          </div>
         </div>
       </header>
 
@@ -295,50 +354,137 @@ export default function AverageGolferPage() {
             className="h-full w-full object-cover object-[50%_30%]"
             initial={{ scale: 1.05 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 6 }}
+            transition={{ duration: 8 }}
             crossOrigin="anonymous"
           />
 
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/35" />
-          <div className="absolute inset-0 bg-[#2f4f3a]/20 mix-blend-multiply" />
+          {/* Cinematic Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+          <div className="absolute inset-0 bg-[#2f4f3a]/15 mix-blend-multiply" />
         </div>
 
-        <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-5xl"
           >
-            <p className="mb-5 text-sm font-bold uppercase tracking-[0.36em] text-white/80">
-              Tennessee Golf
-            </p>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mb-6 text-[11px] font-bold uppercase tracking-[0.4em] text-[#c1b58c]"
+            >
+              Average Golfer Reviews
+            </motion.p>
 
-            <h1 className="font-serif text-6xl font-black uppercase leading-[0.82] tracking-[-0.07em] md:text-8xl lg:text-[9rem]">
+            <h1 className="font-serif text-6xl font-black uppercase leading-[0.82] tracking-[-0.06em] md:text-[7rem] lg:text-[10rem]">
               Top Courses
               <br />
-              in Tennessee
+              <span className="text-[#c1b58c]/90">in Tennessee</span>
             </h1>
 
-            <p className="mt-6 text-lg text-white/85">
-              Public Tracks | Honest Ratings | Real Rounds
-            </p>
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mx-auto mt-8 max-w-lg text-[13px] font-medium uppercase tracking-[0.25em] text-white/60"
+            >
+              Golf reviews, rankings, travel, and content from a 10 handicap trying to get better.
+            </motion.p>
           </motion.div>
         </div>
 
-        <a
-          href="#top"
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border border-white/35 p-3 text-white/80 transition hover:bg-white hover:text-black"
+        <motion.a
+          href="#latest"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.6 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 transition hover:text-white"
         >
-          <ArrowDown size={20} />
-        </a>
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Scroll</span>
+          <ArrowDown size={18} className="animate-bounce" />
+        </motion.a>
       </section>
 
       {/* Main Content */}
       <main>
+        {/* Latest Review Section */}
+        <section id="latest" className="bg-[#1f2d1f] px-5 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.35em] text-[#c1b58c]">
+                Latest Review
+              </p>
+              <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+                <div className="group relative aspect-[16/10] overflow-hidden rounded-2xl">
+                  <img
+                    src={courseData[0].image}
+                    alt={courseData[0].course}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    crossOrigin="anonymous"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-[#c1b58c] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#1a1f1a]">
+                      <Star size={12} /> {courseData[0].rating}
+                    </span>
+                  </div>
+                  {/* Play button overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition group-hover:opacity-100">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                      <Play size={24} className="ml-1 text-white" fill="white" />
+                    </div>
+                  </div>
+                </div>
+                <div className="text-[#f8f3e4]">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+                    #{courseData[0].rank} Overall
+                  </span>
+                  <h2 className="mt-3 font-serif text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] md:text-5xl lg:text-6xl">
+                    {courseData[0].course}
+                  </h2>
+                  <div className="mt-4 flex items-center gap-2 text-sm text-white/50">
+                    <MapPin size={14} />
+                    {courseData[0].location}
+                    <span className="text-white/30">|</span>
+                    <span className="text-[#c1b58c]">{courseData[0].type}</span>
+                  </div>
+                  <p className="mt-6 text-lg leading-relaxed text-white/60">
+                    {courseData[0].note}
+                  </p>
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <a
+                      href={courseData[0].website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#c1b58c] px-6 py-3 text-xs font-bold uppercase tracking-[0.15em] text-[#1a1f1a] transition hover:bg-[#d4c9a4]"
+                    >
+                      <Play size={14} /> Watch Review
+                    </a>
+                    <a
+                      href={courseData[0].booking}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-xs font-bold uppercase tracking-[0.15em] text-white/80 transition hover:bg-white hover:text-[#1a1f1a]"
+                    >
+                      <CalendarDays size={14} /> Book Tee Time
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Top 3 Section */}
-        <section id="top" className="mx-auto max-w-7xl px-5 py-24 md:px-8">
+        <section id="top" className="mx-auto max-w-7xl px-5 py-28 md:px-8 md:py-36">
           <div className="mb-14 grid gap-6 md:grid-cols-[1fr_.75fr] md:items-end">
             <div>
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-[#62704b]">
@@ -363,7 +509,8 @@ export default function AverageGolferPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.45 }}
-                className="group overflow-hidden rounded-[2rem] border border-[#1d2419]/10 bg-[#f8f3e4] shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                whileHover={{ y: -8 }}
+                className="group overflow-hidden rounded-[2rem] border border-[#1d2419]/10 bg-[#f8f3e4] shadow-sm transition-shadow duration-300 hover:shadow-2xl"
               >
                 <div className="relative h-52 overflow-hidden">
                   <img
@@ -535,13 +682,15 @@ export default function AverageGolferPage() {
           {/* About Me */}
           <div className="grid gap-10 md:grid-cols-[1fr_1.5fr] md:items-start">
             <div className="relative">
-              <div className="aspect-[3/4] overflow-hidden rounded-[2rem] bg-[#d9ceb3]">
-                <div className="flex h-full items-center justify-center text-[#56604b]">
-                  <span className="text-sm uppercase tracking-widest">Photo coming soon</span>
-                </div>
+              <div className="aspect-[3/4] overflow-hidden rounded-[2rem] bg-[#d9ceb3] shadow-xl">
+                <img
+                  src="/images/noah-profile.jpg"
+                  alt="Noah on the golf course holding a flag"
+                  className="h-full w-full object-cover object-top"
+                />
               </div>
-              <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#2c3325] px-6 py-3">
-                <p className="font-serif text-2xl font-black text-[#efe9d8]">11</p>
+              <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#2c3325] px-6 py-3 shadow-lg">
+                <p className="font-serif text-2xl font-black text-[#efe9d8]">10</p>
                 <p className="text-xs uppercase tracking-widest text-[#a8b89a]">Handicap</p>
               </div>
             </div>
@@ -567,6 +716,145 @@ export default function AverageGolferPage() {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-[#1d2419]/10 bg-[#1f2d1f] px-5 py-16 text-[#f8f3e4] md:px-8 md:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+            {/* Brand */}
+            <div>
+              <div className="font-serif text-2xl tracking-[-0.02em]">Average Golfer</div>
+              <p className="mt-3 text-sm leading-relaxed text-white/50">
+                Golf reviews, rankings, travel, and content from a 10 handicap trying to get better.
+              </p>
+              <div className="mt-6 flex items-center gap-4">
+                <a
+                  href="https://instagram.com/Ritz_kicks"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/40 transition hover:text-[#c1b58c]"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={20} />
+                </a>
+                <a
+                  href="https://tiktok.com/@Ritz_kicks"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/40 transition hover:text-[#c1b58c]"
+                  aria-label="TikTok"
+                >
+                  <TikTokIcon size={20} />
+                </a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/40 transition hover:text-[#c1b58c]"
+                  aria-label="YouTube"
+                >
+                  <Youtube size={20} />
+                </a>
+                <a
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/40 transition hover:text-[#c1b58c]"
+                  aria-label="X"
+                >
+                  <XIcon size={18} />
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/40">
+                Quick Links
+              </h4>
+              <ul className="mt-4 space-y-3">
+                <li>
+                  <a href="/" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#rankings" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
+                    Rankings
+                  </a>
+                </li>
+                <li>
+                  <a href="/played-map" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
+                    Played Map
+                  </a>
+                </li>
+                <li>
+                  <a href="/brand" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
+                    Brand
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* More */}
+            <div>
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/40">
+                More
+              </h4>
+              <ul className="mt-4 space-y-3">
+                <li>
+                  <a href="#about" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#categories" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
+                    Categories
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:contact@averagegolfer.com" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Newsletter */}
+            <div>
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/40">
+                Stay Updated
+              </h4>
+              <p className="mt-4 text-sm text-white/50">
+                Get notified when new reviews drop.
+              </p>
+              <form className="mt-4 flex gap-2">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="flex-1 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 outline-none transition focus:border-[#c1b58c]/50"
+                />
+                <button
+                  type="submit"
+                  className="rounded-full bg-[#c1b58c] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#1a1f1a] transition hover:bg-[#d4c9a4]"
+                >
+                  Join
+                </button>
+              </form>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
+            <p className="text-xs text-white/30">
+              &copy; {new Date().getFullYear()} Average Golfer Reviews. All rights reserved.
+            </p>
+            <p className="text-xs text-white/30">
+              Built by Noah Jutis
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
