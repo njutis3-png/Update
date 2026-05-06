@@ -9,7 +9,7 @@ import {
   Marker,
   ZoomableGroup,
 } from "react-simple-maps";
-import { MapPin, Star, X, ArrowLeft, Filter, ChevronDown, Plus, Minus, Instagram, Youtube } from "lucide-react";
+import { MapPin, Star, X, ArrowLeft, Filter, ChevronDown, Plus, Minus, Instagram, Youtube, ExternalLink, Play } from "lucide-react";
 
 // Custom TikTok icon
 function TikTokIcon({ size = 16 }: { size?: number }) {
@@ -31,6 +31,9 @@ function XIcon({ size = 16 }: { size?: number }) {
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
+// TikTok profile URL (fallback when specific review video is not available)
+const TIKTOK_PROFILE = "https://www.tiktok.com/@Ritz_kicks";
+
 // Tennessee state FIPS code
 const TN_FIPS = "47";
 
@@ -43,6 +46,7 @@ interface Course {
   state: string;
   note: string;
   status?: "rated" | "played-not-rated";
+  tiktokReview?: string | null;
 }
 
 const courses: Course[] = [
@@ -800,6 +804,18 @@ export default function PlayedMapPage() {
                 </p>
                 <p className="mt-1 font-semibold">{selectedCourse.state}</p>
               </div>
+
+              {/* Watch My Review Button */}
+              <a
+                href={selectedCourse.tiktokReview || TIKTOK_PROFILE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#c1b58c] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-[#1a1f1a] transition hover:bg-[#d4c9a4] hover:shadow-lg hover:shadow-[#c1b58c]/25"
+              >
+                <TikTokIcon size={16} />
+                <span>Watch My Review</span>
+                <ExternalLink size={14} className="opacity-0 transition-opacity group-hover:opacity-100" />
+              </a>
             </motion.div>
           </motion.div>
         )}

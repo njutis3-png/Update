@@ -10,6 +10,7 @@ import {
   Play,
   Instagram,
   Youtube,
+  ExternalLink,
 } from "lucide-react";
 
 // Custom TikTok icon since Lucide doesn't have one
@@ -30,6 +31,9 @@ function XIcon({ size = 16 }: { size?: number }) {
   );
 }
 
+// TikTok profile URL (fallback when specific review video is not available)
+const TIKTOK_PROFILE = "https://www.tiktok.com/@Ritz_kicks";
+
 const courseData = [
   {
     rank: "01",
@@ -41,6 +45,7 @@ const courseData = [
     website: "https://www.thegolfcluboftn.com/",
     booking: "https://www.google.com/search?q=Golf+Club+of+Tennessee+tee+times",
     image: "/images/golf-club-of-tennessee.jpg",
+    tiktokReview: null, // Will link to profile until specific video is available
   },
   {
     rank: "02",
@@ -52,6 +57,7 @@ const courseData = [
     website: "https://sweetenscovegolfclub.com/",
     booking: "https://sweetenscovegolfclub.com/collections/experiences",
     image: "/images/sweetens-cove.jpg",
+    tiktokReview: null,
   },
   {
     rank: "02",
@@ -63,6 +69,7 @@ const courseData = [
     website: "https://www.thegovernorsclub.com/",
     booking: "https://www.thegovernorsclub.com/contact/contact-and-directions",
     image: "/images/governors-club.jpg",
+    tiktokReview: null,
   },
   {
     rank: "04",
@@ -75,6 +82,7 @@ const courseData = [
     booking:
       "https://www.google.com/search?q=The+Grove+College+Grove+TN+golf+tee+times",
     image: "/images/the-grove.jpg",
+    tiktokReview: null,
   },
   {
     rank: "05",
@@ -87,6 +95,7 @@ const courseData = [
     booking:
       "https://www.google.com/search?q=Westhaven+Golf+Club+tee+times",
     image: "/images/westhaven.jpg",
+    tiktokReview: null,
   },
   {
     rank: "06",
@@ -98,6 +107,7 @@ const courseData = [
     website: "https://www.hermitagegolf.com/",
     booking: "https://www.hermitagegolf.com/tee-times/",
     image: "/images/hermitage.jpg",
+    tiktokReview: null,
   },
   {
     rank: "07",
@@ -109,6 +119,7 @@ const courseData = [
     website: "https://www.greystonegc.com/",
     booking: "https://www.greystonegc.com/tee-times/",
     image: "/images/greystone.jpg",
+    tiktokReview: null,
   },
   {
     rank: "08",
@@ -121,6 +132,7 @@ const courseData = [
     booking:
       "https://www.google.com/search?q=Twelve+Stones+Golf+Club+tee+times",
     image: "/images/twelve-stones.jpg",
+    tiktokReview: null,
   },
   {
     rank: "09",
@@ -134,6 +146,7 @@ const courseData = [
     booking:
       "https://www.google.com/search?q=Ted+Rhodes+Golf+Course+tee+times",
     image: "/images/ted-rhodes.jpg",
+    tiktokReview: null,
   },
   {
     rank: "10",
@@ -146,6 +159,7 @@ const courseData = [
       "https://www.nashville.gov/departments/parks/golf-courses/mccabe-golf-course",
     booking: "https://www.google.com/search?q=McCabe+Golf+Course+tee+times",
     image: "/images/mccabe.jpg",
+    tiktokReview: null,
   },
   {
     rank: "11",
@@ -158,6 +172,7 @@ const courseData = [
     booking:
       "https://www.google.com/search?q=Montgomery+Bell+Golf+Course+tee+times",
     image: "/images/montgomery-bell.jpg",
+    tiktokReview: null,
   },
 ];
 
@@ -182,18 +197,23 @@ interface Course {
   website: string;
   booking: string;
   image: string;
+  tiktokReview: string | null;
 }
 
 function CourseButtons({ course }: { course: Course }) {
+  const reviewUrl = course.tiktokReview || TIKTOK_PROFILE;
+  
   return (
     <div className="mt-6 flex flex-wrap gap-3">
       <a
-        href={course.website}
+        href={reviewUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex items-center gap-2 rounded-full bg-[#2f4f3a] px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#3d6149]"
+        className="group inline-flex items-center gap-2 rounded-full bg-[#2f4f3a] px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#3d6149] hover:shadow-lg hover:shadow-[#2f4f3a]/25"
       >
-        <Play size={14} /> Watch Review
+        <TikTokIcon size={14} />
+        <span>Watch My Review</span>
+        <ExternalLink size={12} className="opacity-0 transition-opacity group-hover:opacity-100" />
       </a>
       <a
         href={course.booking}
@@ -436,12 +456,18 @@ export default function AverageGolferPage() {
                       <Star size={12} /> {courseData[0].rating}
                     </span>
                   </div>
-                  {/* Play button overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition group-hover:opacity-100">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                  {/* Play button overlay - links to TikTok review */}
+                  <a
+                    href={courseData[0].tiktokReview || TIKTOK_PROFILE}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 flex cursor-pointer items-center justify-center opacity-0 transition group-hover:opacity-100"
+                    aria-label={`Watch TikTok review of ${courseData[0].course}`}
+                  >
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition hover:scale-110 hover:bg-white/30">
                       <Play size={24} className="ml-1 text-white" fill="white" />
                     </div>
-                  </div>
+                  </a>
                 </div>
                 <div className="text-[#f8f3e4]">
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
@@ -461,12 +487,14 @@ export default function AverageGolferPage() {
                   </p>
                   <div className="mt-8 flex flex-wrap gap-4">
                     <a
-                      href={courseData[0].website}
+                      href={courseData[0].tiktokReview || TIKTOK_PROFILE}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-[#c1b58c] px-6 py-3 text-xs font-bold uppercase tracking-[0.15em] text-[#1a1f1a] transition hover:bg-[#d4c9a4]"
+                      className="group inline-flex items-center gap-2 rounded-full bg-[#c1b58c] px-6 py-3 text-xs font-bold uppercase tracking-[0.15em] text-[#1a1f1a] transition hover:bg-[#d4c9a4] hover:shadow-lg hover:shadow-[#c1b58c]/25"
                     >
-                      <Play size={14} /> Watch Review
+                      <TikTokIcon size={14} />
+                      <span>Watch My Review</span>
+                      <ExternalLink size={12} className="opacity-0 transition-opacity group-hover:opacity-100" />
                     </a>
                     <a
                       href={courseData[0].booking}
