@@ -9,7 +9,25 @@ import {
   Marker,
   ZoomableGroup,
 } from "react-simple-maps";
-import { MapPin, Star, X, ArrowLeft, Filter, ChevronDown, Plus, Minus } from "lucide-react";
+import { MapPin, Star, X, ArrowLeft, Filter, ChevronDown, Plus, Minus, Instagram, Youtube } from "lucide-react";
+
+// Custom TikTok icon
+function TikTokIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+    </svg>
+  );
+}
+
+// Custom X icon
+function XIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  );
+}
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -279,7 +297,7 @@ export default function PlayedMapPage() {
               Average Golfer
             </span>
           </a>
-          <nav className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.22em] text-white/75 md:flex">
+          <nav className="hidden items-center gap-6 text-[11px] font-bold uppercase tracking-[0.22em] text-white/70 md:flex">
             <a href="/#top" className="hover:text-white transition">
               Rankings
             </a>
@@ -292,24 +310,86 @@ export default function PlayedMapPage() {
             <a href="/brand" className="hover:text-white transition">
               Brand
             </a>
+            <a href="/#about" className="hover:text-white transition">
+              About
+            </a>
           </nav>
+          <div className="hidden items-center gap-3 md:flex">
+            <a
+              href="https://instagram.com/Ritz_kicks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition hover:text-[#c1b58c]"
+              aria-label="Instagram"
+            >
+              <Instagram size={18} />
+            </a>
+            <a
+              href="https://tiktok.com/@Ritz_kicks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition hover:text-[#c1b58c]"
+              aria-label="TikTok"
+            >
+              <TikTokIcon size={18} />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition hover:text-[#c1b58c]"
+              aria-label="YouTube"
+            >
+              <Youtube size={18} />
+            </a>
+            <a
+              href="https://x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition hover:text-[#c1b58c]"
+              aria-label="X"
+            >
+              <XIcon size={16} />
+            </a>
+          </div>
         </div>
       </header>
 
       <main className="pt-20">
         {/* Hero */}
-        <section className="border-b border-white/10 px-5 py-16 md:px-8 md:py-24">
+        <section className="border-b border-white/10 px-5 py-20 md:px-8 md:py-28">
           <div className="mx-auto max-w-7xl">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-[#c1b58c]">
-              Where I&apos;ve Played
-            </p>
-            <h1 className="font-serif text-5xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-7xl">
-              Played Map
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/60">
-              An interactive map of every course I&apos;ve played and reviewed.
-              Click on a pin to see details.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.35em] text-[#c1b58c]">
+                Where I&apos;ve Played
+              </p>
+              <h1 className="font-serif text-5xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-7xl lg:text-8xl">
+                Played Map
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/50">
+                An interactive map of every course I&apos;ve played and reviewed.
+                Click on a pin to see details.
+              </p>
+              {/* Stats */}
+              <div className="mt-10 flex flex-wrap gap-8">
+                <div>
+                  <p className="font-serif text-4xl font-black text-[#c1b58c]">{courses.length}</p>
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Total Courses</p>
+                </div>
+                <div>
+                  <p className="font-serif text-4xl font-black">{courses.filter(c => !c.status).length}</p>
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Rated</p>
+                </div>
+                <div>
+                  <p className="font-serif text-4xl font-black">{[...new Set(courses.map(c => c.state))].length}</p>
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">States</p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
@@ -724,6 +804,56 @@ export default function PlayedMapPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 bg-[#0d100d] px-5 py-12 md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
+          <a href="/" className="font-serif text-xl tracking-[-0.02em] text-white/70 transition hover:text-white">
+            Average Golfer
+          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://instagram.com/Ritz_kicks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition hover:text-[#c1b58c]"
+              aria-label="Instagram"
+            >
+              <Instagram size={18} />
+            </a>
+            <a
+              href="https://tiktok.com/@Ritz_kicks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition hover:text-[#c1b58c]"
+              aria-label="TikTok"
+            >
+              <TikTokIcon size={18} />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition hover:text-[#c1b58c]"
+              aria-label="YouTube"
+            >
+              <Youtube size={18} />
+            </a>
+            <a
+              href="https://x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition hover:text-[#c1b58c]"
+              aria-label="X"
+            >
+              <XIcon size={16} />
+            </a>
+          </div>
+          <p className="text-xs text-white/30">
+            &copy; {new Date().getFullYear()} Average Golfer Reviews
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
