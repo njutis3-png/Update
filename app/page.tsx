@@ -251,9 +251,10 @@ export default function AverageGolferPage() {
 
       {/* Top intro */}
       <div className="bg-[#e7e0cf] pt-24 pb-12 px-6 text-center">
-        <p className="mx-auto max-w-3xl text-[12px] md:text-sm tracking-[0.18em] uppercase text-[#1d2419]/80">
-          I’m Noah — an average golfer shooting mid-80s and reviewing courses for regular golfers.
-          No fluff, no country club bias — just honest ratings on where I’d actually play again.
+        <p className="mx-auto max-w-3xl text-[11px] md:text-[13px] font-bold tracking-[0.22em] uppercase text-[#1d2419]/70 leading-relaxed">
+          {"I'm Noah — an average golfer shooting mid-80s and reviewing courses for regular golfers."}
+          <br className="hidden md:block" />
+          {"No fluff, no country club bias — just honest ratings on where I'd actually play again."}
         </p>
       </div>
       
@@ -264,16 +265,22 @@ export default function AverageGolferPage() {
             Average Golfer
           </div>
           <nav className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.22em] text-white/75 md:flex">
-            <a href="#top" className="hover:text-white">
+            <a href="#top" className="hover:text-white transition">
               Top 3
             </a>
-            <a href="#rankings" className="hover:text-white">
+            <a href="#rankings" className="hover:text-white transition">
               Rankings
             </a>
-            <a href="#categories" className="hover:text-white">
+            <a href="#categories" className="hover:text-white transition">
               Categories
             </a>
-            <a href="#about" className="hover:text-white">
+            <a href="/played-map" className="hover:text-white transition">
+              Played Map
+            </a>
+            <a href="/brand" className="hover:text-white transition">
+              Brand
+            </a>
+            <a href="#about" className="hover:text-white transition">
               About
             </a>
           </nav>
@@ -535,12 +542,14 @@ export default function AverageGolferPage() {
           {/* About Me */}
           <div className="grid gap-10 md:grid-cols-[1fr_1.5fr] md:items-start">
             <div className="relative">
-              <div className="aspect-[3/4] overflow-hidden rounded-[2rem] bg-[#d9ceb3]">
-                <div className="flex h-full items-center justify-center text-[#56604b]">
-                  <span className="text-sm uppercase tracking-widest">Photo coming soon</span>
-                </div>
+              <div className="aspect-[3/4] overflow-hidden rounded-[2rem] bg-[#d9ceb3] shadow-xl">
+                <img
+                  src="/images/noah-profile.jpg"
+                  alt="Noah on the golf course holding a flag"
+                  className="h-full w-full object-cover object-top"
+                />
               </div>
-              <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#2c3325] px-6 py-3">
+              <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#2c3325] px-6 py-3 shadow-lg">
                 <p className="font-serif text-2xl font-black text-[#efe9d8]">11</p>
                 <p className="text-xs uppercase tracking-widest text-[#a8b89a]">Handicap</p>
               </div>
