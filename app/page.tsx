@@ -11,7 +11,10 @@ import {
   Instagram,
   Youtube,
   ExternalLink,
+  Mail,
 } from "lucide-react";
+import Link from "next/link";
+import { EmailSignupForm } from "@/components/email-signup-form";
 
 // Custom TikTok icon since Lucide doesn't have one
 function TikTokIcon({ size = 16 }: { size?: number }) {
@@ -841,9 +844,9 @@ export default function AverageGolferPage() {
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:contact@averagegolfer.com" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
+                  <Link href="/contact" className="text-sm text-white/70 transition hover:text-[#c1b58c]">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -856,19 +859,9 @@ export default function AverageGolferPage() {
               <p className="mt-4 text-sm text-white/50">
                 Get notified when new reviews drop.
               </p>
-              <form className="mt-4 flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="flex-1 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 outline-none transition focus:border-[#c1b58c]/50"
-                />
-                <button
-                  type="submit"
-                  className="rounded-full bg-[#c1b58c] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#1a1f1a] transition hover:bg-[#d4c9a4]"
-                >
-                  Join
-                </button>
-              </form>
+              <div className="mt-4">
+                <EmailSignupForm source="homepage-footer" variant="dark" />
+              </div>
             </div>
           </div>
 
