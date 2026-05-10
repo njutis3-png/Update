@@ -92,6 +92,15 @@ const courses: Course[] = [
     note: "Best overall conditions and layout I've played locally.",
   },
   {
+    name: "Gaylord Springs Golf Links",
+    location: "Nashville, TN",
+    coordinates: [-86.6553, 36.1873],
+    rating: "7.9",
+    type: "Public",
+    state: "Tennessee",
+    note: "Great overall course with a challenging layout. Some gettable par 4s mixed with very difficult par 3s. Tons of water throughout. Strong value at around $120.",
+  },
+  {
     name: "Hermitage",
     location: "Old Hickory, TN",
     coordinates: [-86.6189, 36.2534],
@@ -108,6 +117,15 @@ const courses: Course[] = [
     type: "Public",
     state: "Tennessee",
     note: "Strong public track with good greens and a fun layout.",
+  },
+  {
+    name: "Old Fort Golf Club",
+    location: "Murfreesboro, TN",
+    coordinates: [-86.3914, 35.8456],
+    rating: "6.9",
+    type: "Public",
+    state: "Tennessee",
+    note: "Great greens and very beginner friendly. Wide open fairways make it forgiving off the tee. Good value for casual golfers at $65 for 18 + cart.",
   },
   {
     name: "Twelve Stones",

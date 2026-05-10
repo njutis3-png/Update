@@ -90,6 +90,17 @@ const courseData = [
   },
   {
     rank: "06",
+    course: "Gaylord Springs Golf Links",
+    location: "Nashville, TN",
+    rating: "7.9",
+    type: "Public",
+    note: "Great overall course with a challenging layout. Some gettable par 4s mixed with very difficult par 3s. Tons of water throughout. Strong value at around $120.",
+    website: "https://www.gaylordspringsgolf.com/",
+    booking: "https://www.google.com/search?q=Gaylord+Springs+Golf+Links+tee+times",
+    image: "/images/gaylord-springs.jpg",
+  },
+  {
+    rank: "06",
     course: "Hermitage",
     location: "Old Hickory, TN",
     rating: "7.9",
@@ -100,7 +111,7 @@ const courseData = [
     image: "/images/hermitage.jpg",
   },
   {
-    rank: "07",
+    rank: "08",
     course: "Greystone Golf Club",
     location: "Dickson, TN",
     rating: "7.8",
@@ -111,7 +122,18 @@ const courseData = [
     image: "/images/greystone.jpg",
   },
   {
-    rank: "08",
+    rank: "09",
+    course: "Old Fort Golf Club",
+    location: "Murfreesboro, TN",
+    rating: "6.9",
+    type: "Public / Muni",
+    note: "Great greens and very beginner friendly. Wide open fairways make it forgiving off the tee. Good value for casual golfers at $65 for 18 + cart.",
+    website: "https://www.oldfortgolf.com/",
+    booking: "https://www.google.com/search?q=Old+Fort+Golf+Club+Murfreesboro+tee+times",
+    image: "/images/old-fort.jpg",
+  },
+  {
+    rank: "09",
     course: "Twelve Stones",
     location: "Goodlettsville, TN",
     rating: "6.9",
@@ -123,7 +145,7 @@ const courseData = [
     image: "/images/twelve-stones.jpg",
   },
   {
-    rank: "09",
+    rank: "11",
     course: "Ted Rhodes Golf Course",
     location: "Nashville, TN",
     rating: "6.6",
@@ -136,7 +158,7 @@ const courseData = [
     image: "/images/ted-rhodes.jpg",
   },
   {
-    rank: "10",
+    rank: "12",
     course: "McCabe Golf Course",
     location: "Nashville, TN",
     rating: "6.5",
@@ -148,7 +170,7 @@ const courseData = [
     image: "/images/mccabe.jpg",
   },
   {
-    rank: "11",
+    rank: "13",
     course: "Montgomery Bell",
     location: "Burns, TN",
     rating: "6.4",
@@ -166,8 +188,10 @@ const publicCourses = courseData.filter((course) => course.type === "Public");
 const privateCourses = courseData.filter((course) => course.type === "Private");
 const valueCourses = [
   courseData.find((course) => course.course === "Sweetens Cove"),
+  courseData.find((course) => course.course === "Gaylord Springs Golf Links"),
   courseData.find((course) => course.course === "Hermitage"),
   courseData.find((course) => course.course === "Greystone Golf Club"),
+  courseData.find((course) => course.course === "Old Fort Golf Club"),
   courseData.find((course) => course.course === "Twelve Stones"),
   courseData.find((course) => course.course === "Ted Rhodes Golf Course"),
 ].filter(Boolean);
