@@ -415,7 +415,7 @@ export default function AverageGolferPage() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="mx-auto mt-8 max-w-lg text-[13px] font-medium uppercase tracking-[0.25em] text-white/60"
             >
-              Golf reviews, rankings, travel, and content from a 10 handicap trying to get better.
+              Golf reviews, rankings, travel, and content from a 9.6 handicap trying to get better.
             </motion.p>
           </motion.div>
         </div>
@@ -714,8 +714,8 @@ export default function AverageGolferPage() {
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#2c3325] px-6 py-3 shadow-lg">
-                <p className="font-serif text-2xl font-black text-[#efe9d8]">10</p>
-                <p className="text-xs uppercase tracking-widest text-[#a8b89a]">Handicap</p>
+<p className="font-serif text-2xl font-black text-[#efe9d8]">9.6</p>
+                          <p className="text-xs uppercase tracking-widest text-[#a8b89a]">Handicap</p>
               </div>
             </div>
             <div>
@@ -749,7 +749,7 @@ export default function AverageGolferPage() {
             <div>
               <div className="font-serif text-2xl tracking-[-0.02em]">Average Golfer</div>
               <p className="mt-3 text-sm leading-relaxed text-white/50">
-                Golf reviews, rankings, travel, and content from a 10 handicap trying to get better.
+                Golf reviews, rankings, travel, and content from a 9.6 handicap trying to get better.
               </p>
               <div className="mt-6 flex items-center gap-4">
                 <a
