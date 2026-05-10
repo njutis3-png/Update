@@ -95,8 +95,8 @@ const courseData = [
     rating: "7.9",
     type: "Public",
     note: "Great overall course with a challenging layout. Some gettable par 4s mixed with very difficult par 3s. Tons of water throughout. Strong value at around $120.",
-    website: "https://www.gaylordspringsgolf.com/",
-    booking: "https://www.google.com/search?q=Gaylord+Springs+Golf+Links+tee+times",
+    website: "https://www.gaylordsprings.com/",
+    booking: "https://www.gaylordsprings.com/tee-times/",
     image: "/images/gaylord-springs.jpg",
   },
   {
@@ -128,8 +128,8 @@ const courseData = [
     rating: "6.9",
     type: "Public / Muni",
     note: "Great greens and very beginner friendly. Wide open fairways make it forgiving off the tee. Good value for casual golfers at $65 for 18 + cart.",
-    website: "https://www.oldfortgolf.com/",
-    booking: "https://www.google.com/search?q=Old+Fort+Golf+Club+Murfreesboro+tee+times",
+    website: "https://www.oldfortgolfclub.com/",
+    booking: "https://www.oldfortgolfclub.com/tee-times/",
     image: "/images/old-fort.jpg",
   },
   {
