@@ -90,6 +90,17 @@ const courseData = [
   },
   {
     rank: "06",
+    course: "Gaylord Springs Golf Links",
+    location: "Nashville, TN",
+    rating: "7.9",
+    type: "Public",
+    note: "Great overall course with a challenging layout. Some gettable par 4s mixed with very difficult par 3s. Tons of water throughout. Strong value at around $120.",
+    website: "https://www.gaylordsprings.com/",
+    booking: "https://www.gaylordsprings.com/tee-times/",
+    image: "/images/gaylord-springs.jpg",
+  },
+  {
+    rank: "06",
     course: "Hermitage",
     location: "Old Hickory, TN",
     rating: "7.9",
@@ -100,7 +111,7 @@ const courseData = [
     image: "/images/hermitage.jpg",
   },
   {
-    rank: "07",
+    rank: "08",
     course: "Greystone Golf Club",
     location: "Dickson, TN",
     rating: "7.8",
@@ -111,7 +122,18 @@ const courseData = [
     image: "/images/greystone.jpg",
   },
   {
-    rank: "08",
+    rank: "09",
+    course: "Old Fort Golf Club",
+    location: "Murfreesboro, TN",
+    rating: "6.9",
+    type: "Public / Muni",
+    note: "Great greens and very beginner friendly. Wide open fairways make it forgiving off the tee. Good value for casual golfers at $65 for 18 + cart.",
+    website: "https://www.oldfortgolfclub.com/",
+    booking: "https://www.oldfortgolfclub.com/tee-times/",
+    image: "/images/old-fort.jpg",
+  },
+  {
+    rank: "09",
     course: "Twelve Stones",
     location: "Goodlettsville, TN",
     rating: "6.9",
@@ -123,7 +145,7 @@ const courseData = [
     image: "/images/twelve-stones.jpg",
   },
   {
-    rank: "09",
+    rank: "11",
     course: "Ted Rhodes Golf Course",
     location: "Nashville, TN",
     rating: "6.6",
@@ -136,7 +158,7 @@ const courseData = [
     image: "/images/ted-rhodes.jpg",
   },
   {
-    rank: "10",
+    rank: "12",
     course: "McCabe Golf Course",
     location: "Nashville, TN",
     rating: "6.5",
@@ -148,7 +170,7 @@ const courseData = [
     image: "/images/mccabe.jpg",
   },
   {
-    rank: "11",
+    rank: "13",
     course: "Montgomery Bell",
     location: "Burns, TN",
     rating: "6.4",
@@ -166,8 +188,10 @@ const publicCourses = courseData.filter((course) => course.type === "Public");
 const privateCourses = courseData.filter((course) => course.type === "Private");
 const valueCourses = [
   courseData.find((course) => course.course === "Sweetens Cove"),
+  courseData.find((course) => course.course === "Gaylord Springs Golf Links"),
   courseData.find((course) => course.course === "Hermitage"),
   courseData.find((course) => course.course === "Greystone Golf Club"),
+  courseData.find((course) => course.course === "Old Fort Golf Club"),
   courseData.find((course) => course.course === "Twelve Stones"),
   courseData.find((course) => course.course === "Ted Rhodes Golf Course"),
 ].filter(Boolean);
@@ -391,7 +415,7 @@ export default function AverageGolferPage() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="mx-auto mt-8 max-w-lg text-[13px] font-medium uppercase tracking-[0.25em] text-white/60"
             >
-              Golf reviews, rankings, travel, and content from a 10 handicap trying to get better.
+              Golf reviews, rankings, travel, and content from a 9.6 handicap trying to get better.
             </motion.p>
           </motion.div>
         </div>
@@ -690,8 +714,8 @@ export default function AverageGolferPage() {
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#2c3325] px-6 py-3 shadow-lg">
-                <p className="font-serif text-2xl font-black text-[#efe9d8]">10</p>
-                <p className="text-xs uppercase tracking-widest text-[#a8b89a]">Handicap</p>
+<p className="font-serif text-2xl font-black text-[#efe9d8]">9.6</p>
+                          <p className="text-xs uppercase tracking-widest text-[#a8b89a]">Handicap</p>
               </div>
             </div>
             <div>
@@ -725,7 +749,7 @@ export default function AverageGolferPage() {
             <div>
               <div className="font-serif text-2xl tracking-[-0.02em]">Average Golfer</div>
               <p className="mt-3 text-sm leading-relaxed text-white/50">
-                Golf reviews, rankings, travel, and content from a 10 handicap trying to get better.
+                Golf reviews, rankings, travel, and content from a 9.6 handicap trying to get better.
               </p>
               <div className="mt-6 flex items-center gap-4">
                 <a
